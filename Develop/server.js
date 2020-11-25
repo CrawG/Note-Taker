@@ -51,8 +51,8 @@ app.post("/api/notes", function (request, response) {
         console.log('File data:', jsonString);
         var notes = JSON.parse(jsonString);
 
-        // Note object 
-        const newNote = {
+        // Note objects
+        let newNote = {
             title: request.body.title,
             text: request.body.text,
             id: Math.random().toString(36).substr(2, 9)
@@ -74,8 +74,7 @@ app.post("/api/notes", function (request, response) {
 
 });
 
-// DELETE /api/notes/:id - Should recieve a query paramter containing the id of a note to delete. This means you'll need to find a way to give each note a unique id when it's saved. In order to delete a note, you'll need to read all notes from the db.json file, remove the note with the given id property, and then rewrite the notes to the db.json file.
-
+// DELETE /api/notes/:id - Should recieve a query paramter containing the id of a note to delete.
 app.delete('/api/notes/:id', function (request, response) {
     fs.readFile(path.join(__dirname, "db", "db.json"), 'utf8', (err, jsonString) => {
         if (err) {
@@ -87,18 +86,22 @@ app.delete('/api/notes/:id', function (request, response) {
         var notes = JSON.parse(jsonString);
 
         // Note object 
-        const newNote = {
+        let newNote = {
             title: request.body.title,
             text: request.body.text,
             id: Math.random().toString(36).substr(2, 9)
         };
 
-        
-        notes.splice(request.params.id, 1);
-        
-        let NotesJSON = JSON.stringify(notes);
+        // Target note object by id and remove from notes array
+        let id = request.params.id;
+
+        var indexOfNote = notes.findIndex(i => i.id === id);
+
+        notes.splice(indexOfNote, 1);
         
 
+        let NotesJSON = JSON.stringify(notes);
+        
         fs.writeFile(path.join(__dirname, "db", "db.json"), NotesJSON, (err) => {
             if (err) {
                 return console.log(err);
@@ -110,8 +113,6 @@ app.delete('/api/notes/:id', function (request, response) {
     })
 
 });
-
-
 
 
 // Confirm server listening

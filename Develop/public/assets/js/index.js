@@ -1,3 +1,5 @@
+// $(document).ready(function(){
+
 const $noteTitle = $(".note-title");
 const $noteText = $(".note-textarea");
 const $saveNoteBtn = $(".save-note");
@@ -147,5 +149,29 @@ $noteList.on("click", ".delete-note", handleNoteDelete);
 $noteTitle.on("keyup", handleRenderSaveBtn);
 $noteText.on("keyup", handleRenderSaveBtn);
 
+
+
+// $(document).ready(function () {
+//   // When typing noteTitle or noteText, check if a note's title or text are empty - hide or show the save button
+//   $noteTitle.on("keyup", handleRenderSaveBtn);
+//   $noteText.on("keyup", handleRenderSaveBtn);
+
+//   // When Save button is clicked, handleNoteSave and save note
+//   $saveNoteBtn.on("click", handleNoteSave);
+
+//   // When New button is clicked, allow user to enter a new note
+//   $newNoteBtn.on("click", handleNewNoteView);
+//   $newNoteIcon.on("click", handleNewNoteView);
+
+//   // When list item is clicked, display it as the activeNote
+//   $noteList.on("click", ".list-group-item", handleNoteView);
+//   // When delete icon on list item is clicked, delete note
+//   $noteList.on("click", ".delete-note", handleNoteDelete);
+// });
+
+
+
 // Gets and renders the initial list of notes
 getAndRenderNotes();
+
+// });
