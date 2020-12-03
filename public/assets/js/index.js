@@ -23,7 +23,8 @@ const saveNote = (note) => {
     url: "/api/notes",
     data: note,
     method: "POST",
-  });
+  })
+  
 };
 
 // A function for deleting a note from the db
@@ -31,7 +32,8 @@ const deleteNote = (id) => {
   return $.ajax({
     url: "api/notes/" + id,
     method: "DELETE",
-  });
+  })
+  
 };
 
 // If there is an activeNote, display it, otherwise render empty inputs
@@ -61,13 +63,17 @@ const handleNoteSave = function () {
   saveNote(newNote).then(() => {
     getAndRenderNotes();
     renderActiveNote();
+    
   });
+
+  location.reload();
+
 };
 
 // Delete the clicked note
 const handleNoteDelete = function (event) {
   // prevents the click listener for the list from being called when the button inside of it is clicked
-  event.stopPropagation();
+  // event.stopPropagation();
 
   const note = $(this).parent(".list-group-item").data();
 
@@ -79,6 +85,8 @@ const handleNoteDelete = function (event) {
     getAndRenderNotes();
     renderActiveNote();
   });
+  location.reload();
+
 };
 
 // Sets the activeNote and displays it
